@@ -1,0 +1,108 @@
+[
+  {
+    "id": "scen-sus-01",
+    "type": "suspicious",
+    "title": "Fictional Scenario 01",
+    "chunks": [
+      { "id": "s1c1", "text": "Hi, we came across your profile and have a role for you.", "suspicious": false },
+      { "id": "s1c2", "text": "To process your profile you need to pay a small registration fee.", "suspicious": true, "tacticId": "upfront_fees" },
+      { "id": "s1c3", "text": "Can you move this to WhatsApp right now?", "suspicious": true, "tacticId": "push_to_messaging" },
+      { "id": "s1c4", "text": "We need your Aadhaar number to hold this slot.", "suspicious": true, "tacticId": "early_pii_bank" },
+      { "id": "s1c5", "text": "We will send details after that.", "suspicious": false },
+      { "id": "s1c6", "text": "Thanks.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-sus-02",
+    "type": "suspicious",
+    "title": "Fictional Scenario 02",
+    "chunks": [
+      { "id": "s2c1", "text": "Hello, we have an opening for a junior role.", "suspicious": false },
+      { "id": "s2c2", "text": "There are limited slots and you must act now.", "suspicious": true, "tacticId": "urgency_pressure" },
+      { "id": "s2c3", "text": "To confirm your spot, pay a small processing fee.", "suspicious": true, "tacticId": "upfront_fees" },
+      { "id": "s2c4", "text": "Let's connect on WhatsApp to complete the form.", "suspicious": true, "tacticId": "push_to_messaging" },
+      { "id": "s2c5", "text": "Looking forward to hearing from you.", "suspicious": false },
+      { "id": "s2c6", "text": "No prior experience needed.", "suspicious": false },
+      { "id": "s2c7", "text": "Apply quickly.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-sus-03",
+    "type": "suspicious",
+    "title": "Fictional Scenario 03",
+    "chunks": [
+      { "id": "s3c1", "text": "We found your profile suitable for a home-based role.", "suspicious": false },
+      { "id": "s3c2", "text": "Simple task, big payout - earn Rs 80000 per month with no experience.", "suspicious": true, "tacticId": "vague_unrealistic_pay" },
+      { "id": "s3c3", "text": "Send your bank account details to start today.", "suspicious": true, "tacticId": "early_pii_bank" },
+      { "id": "s3c4", "text": "Move this to Telegram for faster processing.", "suspicious": true, "tacticId": "push_to_messaging" },
+      { "id": "s3c5", "text": "Training materials will follow.", "suspicious": false },
+      { "id": "s3c6", "text": "Reply soon.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-sus-04",
+    "type": "suspicious",
+    "title": "Fictional Scenario 04",
+    "chunks": [
+      { "id": "s4c1", "text": "Greetings, we have a junior role open for fresh graduates.", "suspicious": false },
+      { "id": "s4c2", "text": "This offer expires tonight - apply within the hour.", "suspicious": true, "tacticId": "urgency_pressure" },
+      { "id": "s4c3", "text": "We need your PAN card details to issue an offer letter draft.", "suspicious": true, "tacticId": "early_pii_bank" },
+      { "id": "s4c4", "text": "Pay a security deposit to reserve your seat.", "suspicious": true, "tacticId": "upfront_fees" },
+      { "id": "s4c5", "text": "We look forward to working with you.", "suspicious": false },
+      { "id": "s4c6", "text": "Location flexible.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-sus-05",
+    "type": "suspicious",
+    "title": "Fictional Scenario 05",
+    "chunks": [
+      { "id": "s5c1", "text": "Hi, I found your profile for a data entry role.", "suspicious": false },
+      { "id": "s5c2", "text": "Data entry is easy with high pay - Rs 90000 per month, no experience needed.", "suspicious": true, "tacticId": "vague_unrealistic_pay" },
+      { "id": "s5c3", "text": "To get started, pay a training fee of a small amount.", "suspicious": true, "tacticId": "upfront_fees" },
+      { "id": "s5c4", "text": "Let's continue on WhatsApp right now.", "suspicious": true, "tacticId": "push_to_messaging" },
+      { "id": "s5c5", "text": "Our team responds within two days.", "suspicious": false },
+      { "id": "s5c6", "text": "Reply to proceed.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-sus-06",
+    "type": "suspicious",
+    "title": "Fictional Scenario 06",
+    "chunks": [
+      { "id": "s6c1", "text": "Good day, we have an opening for freshers.", "suspicious": false },
+      { "id": "s6c2", "text": "Hurry up - last chance as slots are filling fast.", "suspicious": true, "tacticId": "urgency_pressure" },
+      { "id": "s6c3", "text": "Send your Aadhaar number and bank details for verification.", "suspicious": true, "tacticId": "early_pii_bank" },
+      { "id": "s6c4", "text": "Move this to Telegram for the registration link.", "suspicious": true, "tacticId": "push_to_messaging" },
+      { "id": "s6c5", "text": "This is a great opportunity.", "suspicious": false },
+      { "id": "s6c6", "text": "We look forward to your response.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-clean-01",
+    "type": "clean",
+    "title": "Fictional Clean Scenario 01",
+    "chunks": [
+      { "id": "c1c1", "text": "Hi, thank you for your application.", "suspicious": false },
+      { "id": "c1c2", "text": "We would like to invite you for a first-round interview.", "suspicious": false },
+      { "id": "c1c3", "text": "Please use the official careers link we shared by email.", "suspicious": false },
+      { "id": "c1c4", "text": "The interview will be conducted via our verified platform.", "suspicious": false },
+      { "id": "c1c5", "text": "Let us know if you have questions about timing.", "suspicious": false },
+      { "id": "c1c6", "text": "We look forward to speaking with you.", "suspicious": false }
+    ]
+  },
+  {
+    "id": "scen-clean-02",
+    "type": "clean",
+    "title": "Fictional Clean Scenario 02",
+    "chunks": [
+      { "id": "c2c1", "text": "Hello, we reviewed your profile for the junior role.", "suspicious": false },
+      { "id": "c2c2", "text": "Our team would like to schedule a short screening call.", "suspicious": false },
+      { "id": "c2c3", "text": "You can book a slot on our official careers portal.", "suspicious": false },
+      { "id": "c2c4", "text": "No fees are involved at any stage.", "suspicious": false },
+      { "id": "c2c5", "text": "We will share meeting details by email.", "suspicious": false },
+      { "id": "c2c6", "text": "Best regards from our hiring team.", "suspicious": false },
+      { "id": "c2c7", "text": "Looking forward to connecting.", "suspicious": false }
+    ]
+  }
+]
