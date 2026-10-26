@@ -119,13 +119,12 @@ describe('analyzeMessage', () => {
     expect(res.matches.some(m => m.source === 'sender')).toBe(true);
   });
 
-  it('handles overlapping matches', () => {
-    // Create a case where patterns might overlap - test that overlaps are resolved
+  it('handles overlapping matches by keeping the earliest and longest', () => {
     const res = analyzeMessage({ text: 'pay a small registration fee' });
-    // Should not have overlapping ranges
-    const matches = res.matches;
-    for (let i = 0; i < matches.length - 1; i++) {
-      expect(matches[i].end <= matches[i+1].start || matches[i+1].end <= matches[i].start).toBe(true);
+    expect(res.matches.length).toBe(1);
+    expect(res.matches[0].phrase).toBe('pay a small registration fee');
+    for (let i = 0; i < res.matches.length - 1; i++) {
+      expect(res.matches[i].end <= res.matches[i + 1].start).toBe(true);
     }
   });
 
