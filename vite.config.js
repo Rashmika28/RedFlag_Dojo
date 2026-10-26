@@ -1,3 +1,4 @@
+// This file configures Vite and Vitest for the app.
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'

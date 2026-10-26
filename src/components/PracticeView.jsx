@@ -16,8 +16,7 @@ export default function PracticeView({
           <p className="eyebrow">Practice hall</p>
           <h1>Read the message. Tap the tactics.</h1>
           <p className="hero__lead">
-            Three fictional messages per round. Two carry tactics, one is clean.
-            Flag only what earns a signal.
+            Three fictional messages. Tap a clause to flag it; tap again to clear it.
           </p>
         </section>
 
@@ -30,11 +29,7 @@ export default function PracticeView({
             <span className="practice-start__label">Cumulative score</span>
             <span className="practice-start__value">{cumulativeScore}</span>
           </div>
-          <p className="practice-start__note">
-            No hints before you submit. The message is split into clauses; tap a
-            clause to flag it, tap again to clear it.
-          </p>
-          <button type="button" className="btn btn--primary btn--wide" onClick={onStartRound}>
+          <button type="button" className="btn btn--primary btn--wide practice-start__cta" onClick={onStartRound}>
             Start round
           </button>
         </section>

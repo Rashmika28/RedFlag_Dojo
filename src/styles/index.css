@@ -722,10 +722,8 @@ textarea:focus-visible {
   color: var(--accent);
 }
 
-.practice-start__note {
-  margin: 18px 0;
-  color: var(--paper-dim);
-  font-size: 0.9rem;
+.practice-start__cta {
+  margin-top: 18px;
 }
 
 .practice-progress {
