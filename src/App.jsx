@@ -1,5 +1,5 @@
 // This file is the root component and holds all session state for RedFlag Dojo.
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AnalyzeView from './components/AnalyzeView.jsx';
 import ResultsView from './components/ResultsView.jsx';
 import PracticeView from './components/PracticeView.jsx';
@@ -43,8 +43,27 @@ export default function App() {
   const [feedback, setFeedback] = useState(null);
   const [summary, setSummary] = useState(null);
   const [cumulativeScore, setCumulativeScore] = useState(0);
+  const isFirstRender = useRef(true);
 
   const currentBelt = getBelt(cumulativeScore).belt;
+  const viewKey = [
+    mode,
+    analysis ? 'results' : 'analyze',
+    summary ? 'summary' : '',
+    feedback ? `feedback-${round ? round.index : ''}` : '',
+    round ? `round-${round.index}` : 'round-start'
+  ].join(':');
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const main = document.getElementById('main-content');
+    if (main) main.focus({ preventScroll: true });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [viewKey]);
 
   function handleAnalyze() {
     if (text.trim().length === 0) return;
@@ -212,6 +231,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="app-header">
         <div className="brand">
           <span className="brand__mark" aria-hidden="true">//</span>

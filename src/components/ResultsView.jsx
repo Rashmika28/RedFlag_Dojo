@@ -34,7 +34,7 @@ function AnnotatedMessage({ text, matches }) {
     }
     pieces.push(
       <mark className="evidence-mark" key={`${match.ruleId}-${match.start}`}>
-        <span className="evidence-mark__number">{match.number}</span>
+        <span className="evidence-mark__number" aria-hidden="true">{match.number}</span>
         {text.slice(match.start, match.end)}
       </mark>
     );
@@ -53,7 +53,8 @@ export default function ResultsView({ analysis, text, sender, onBack, onPractice
   const categoryCount = new Set(numbered.map((match) => match.category)).size;
 
   return (
-    <main className="screen results-screen">
+    <main id="main-content" tabIndex={-1} className="screen results-screen" aria-labelledby="screen-title">
+      <h1 id="screen-title" className="sr-only">Signal results</h1>
       <div className="results-topbar">
         <button type="button" className="btn btn--ghost btn--small" onClick={onBack}>
           Edit message

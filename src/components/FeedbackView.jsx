@@ -22,7 +22,8 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
   ];
 
   return (
-    <main className="screen feedback-screen">
+    <main id="main-content" tabIndex={-1} className="screen feedback-screen" aria-labelledby="screen-title">
+      <h1 id="screen-title" className="sr-only">Feedback for message {messageIndex + 1}</h1>
       <div className="feedback-header">
         <div>
           <p className="eyebrow">Message {messageIndex + 1} of {totalMessages} feedback</p>
@@ -30,9 +31,9 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
             Green caught, red missed, grey outline false flag.
           </p>
         </div>
-        <div className="score-stamp">
-          <span className="score-stamp__value">{result.messageScore}</span>
-          <span className="score-stamp__max">/ 6</span>
+        <div className="score-stamp" role="group" aria-label={`Message score ${result.messageScore} out of 6`}>
+          <span className="score-stamp__value" aria-hidden="true">{result.messageScore}</span>
+          <span className="score-stamp__max" aria-hidden="true">/ 6</span>
         </div>
       </div>
 
@@ -57,7 +58,7 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
                 )}
                 {state === 'false-flag' && (
                   <p className="feedback-chunk__note">
-                    This clause carried no tactic. Leaving it alone protects your score.
+                    This clause carried no tactic. Flagging it costs 2 points; leaving it alone protects your score.
                   </p>
                 )}
               </div>
@@ -66,11 +67,12 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
         </div>
       </section>
 
-      <div className="feedback-tally">
+      <div className="feedback-tally" role="status" aria-live="polite">
         <span>Caught {result.correctCaught}</span>
         <span>Missed {result.missed}</span>
         <span>False flags {result.falseFlags}</span>
       </div>
+      <p className="feedback-legend">+2 per catch. -2 per false flag. Misses cost 0.</p>
 
       <div className="practice-actions">
         <button type="button" className="btn btn--primary btn--wide" onClick={onNext}>

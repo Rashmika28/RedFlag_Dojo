@@ -135,6 +135,19 @@ describe('data validation', () => {
     }
   });
 
+  it('every suspicious chunk trips the tactic it declares', () => {
+    for (let i = 0; i < scenarios.length; i++) {
+      const chunks = scenarios[i].chunks || [];
+      for (let j = 0; j < chunks.length; j++) {
+        if (chunks[j].suspicious) {
+          const result = analyzeMessage({ text: chunks[j].text });
+          const tacticIds = result.matches.map((match) => match.tacticId);
+          expect(tacticIds).toContain(chunks[j].tacticId);
+        }
+      }
+    }
+  });
+
   it('every clean chunk trips no rules', () => {
     for (let i = 0; i < scenarios.length; i++) {
       const chunks = scenarios[i].chunks || [];

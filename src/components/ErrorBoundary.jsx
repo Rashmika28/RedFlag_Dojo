@@ -14,9 +14,9 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <main className="screen error-screen">
+        <main id="main-content" tabIndex={-1} className="screen error-screen" aria-labelledby="screen-title">
           <p className="eyebrow">Something broke</p>
-          <h1>The hall went quiet.</h1>
+          <h1 id="screen-title">The hall went quiet.</h1>
           <p className="hero__lead">
             Reload to start again. Belt progress is session-only, so a refresh
             resets it to White.

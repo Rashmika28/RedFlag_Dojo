@@ -1,5 +1,6 @@
 // This file renders the end-of-round summary with score, belt, and recap.
 import BeltBadge from './BeltBadge.jsx';
+import BeltTrack from './BeltTrack.jsx';
 
 const BELT_LABELS = {
   WHITE: 'White',
@@ -12,14 +13,15 @@ export default function RoundSummary({ summary, round, onPlayAgain, onBackToAnal
   const nextBeltLabel = summary.nextBelt ? BELT_LABELS[summary.nextBelt] : null;
 
   return (
-    <main className="screen summary-screen">
+    <main id="main-content" tabIndex={-1} className="screen summary-screen" aria-labelledby="screen-title">
+      <h1 id="screen-title" className="sr-only">Round summary</h1>
       <p className="eyebrow">Round complete</p>
 
       <section className="summary-hero">
-        <div className="summary-hero__score">
-          <span className="summary-hero__value">{summary.roundScore}</span>
-          <span className="summary-hero__max">/ 18</span>
-          <span className="summary-hero__caption">round score</span>
+        <div className="summary-hero__score" role="group" aria-label={`Round score ${summary.roundScore} out of 18`}>
+          <span className="summary-hero__value" aria-hidden="true">{summary.roundScore}</span>
+          <span className="summary-hero__max" aria-hidden="true">/ 18</span>
+          <span className="summary-hero__caption" aria-hidden="true">round score</span>
         </div>
         <div className="summary-hero__belt">
           <BeltBadge belt={summary.currentBelt} />
@@ -34,6 +36,8 @@ export default function RoundSummary({ summary, round, onPlayAgain, onBackToAnal
         </div>
       </section>
 
+      <BeltTrack belt={summary.currentBelt} />
+
       {summary.beltUp && (
         <section className="belt-up" aria-live="polite">
           <span className="belt-up__tag">Belt up</span>
@@ -47,7 +51,7 @@ export default function RoundSummary({ summary, round, onPlayAgain, onBackToAnal
       <section className="section-block">
         <div className="section-heading">
           <h2>Round breakdown</h2>
-          <p>Misses cost no points. False flags do.</p>
+          <p>Misses cost no points. Each false flag costs 2.</p>
         </div>
         <div className="breakdown-grid">
           <div className="breakdown-stat">

@@ -158,4 +158,91 @@ describe('analyzeMessage', () => {
     expect(res.distinctRuleCount).toBe(0);
     expect(res.checklist.length).toBe(0);
   });
+
+  it.each([
+    ['fee-upfront-1', 'pay a registration fee'],
+    ['fee-upfront-1', 'pay a small processing fee'],
+    ['fee-upfront-2', 'pay a security deposit'],
+    ['fee-upfront-2', 'training fee required'],
+    ['msg-push-1', 'move this to whatsapp'],
+    ['msg-push-1', 'move to telegram'],
+    ['msg-push-2', 'connect on whatsapp'],
+    ['msg-push-2', 'talk on telegram'],
+    ['email-free-1', 'write to hr@gmail.com'],
+    ['email-free-1', 'write to hr@outlook.com'],
+    ['email-free-2', 'write to hr@rediffmail.com'],
+    ['email-free-2', 'write to hr@aol.com'],
+    ['urgency-1', 'limited slots available'],
+    ['urgency-1', 'act now'],
+    ['urgency-2', 'offer expires today'],
+    ['urgency-2', 'apply within two hours'],
+    ['urgency-2', 'urgent hiring'],
+    ['pii-bank-1', 'send your aadhaar'],
+    ['pii-bank-1', 'share pan card'],
+    ['pii-bank-2', 'send bank account details'],
+    ['pii-bank-2', 'share ifsc code'],
+    ['vague-pay-1', 'work from home earn 50000'],
+    ['vague-pay-1', 'high pay for no experience'],
+    ['vague-pay-2', 'simple task with a big payout'],
+    ['vague-pay-2', 'data entry easy high pay']
+  ])('matches %s for the intended phrase "%s"', (ruleId, text) => {
+    const res = analyzeMessage({ text });
+    expect(res.matches.length).toBeGreaterThan(0);
+    expect(res.matches.every((match) => match.ruleId === ruleId)).toBe(true);
+  });
+
+  it('returns offsets that slice back to the exact matched phrase', () => {
+    const text = 'Please pay a small registration fee, then move this to WhatsApp.';
+    const res = analyzeMessage({ text });
+    expect(res.matches.length).toBeGreaterThan(0);
+    for (const match of res.matches) {
+      expect(text.slice(match.start, match.end)).toBe(match.phrase);
+    }
+  });
+
+  it('keeps sender offsets in the sender line', () => {
+    const sender = 'Talent Desk <hr@gmail.com>';
+    const res = analyzeMessage({ text: 'Hello there', sender });
+    const match = res.matches.find((item) => item.source === 'sender');
+    expect(match).toBeTruthy();
+    expect(match.phrase).toBe('@gmail.com');
+    expect(sender.slice(match.start, match.end)).toBe(match.phrase);
+  });
+
+  it('counts a repeated phrase once for rules but returns each match', () => {
+    const res = analyzeMessage({ text: 'Aadhaar is required. Send Aadhaar again.' });
+    expect(res.matches.length).toBe(2);
+    expect(res.distinctRuleCount).toBe(1);
+    expect(res.checklist.length).toBe(1);
+  });
+
+  it('caps the checklist at six actions', () => {
+    const res = analyzeMessage({
+      text: 'Registration fee. Move this to WhatsApp. Limited slots. Send Aadhaar and bank account. Work from home earn 50000. Email hr@gmail.com.'
+    });
+    expect(res.distinctRuleCount).toBeGreaterThan(6);
+    expect(res.checklist.length).toBe(6);
+    expect(new Set(res.checklist).size).toBe(6);
+  });
+
+  it('maps distinct rule counts to summary levels', () => {
+    const messages = [
+      'send your aadhaar',
+      'send your aadhaar. move this to whatsapp',
+      'send your aadhaar. move this to whatsapp. registration fee',
+      'send your aadhaar. move this to whatsapp. registration fee. limited slots',
+      'send your aadhaar. move this to whatsapp. registration fee. limited slots. work from home earn 50000'
+    ];
+    const levels = messages.map((text) => analyzeMessage({ text }).summaryLevel);
+    expect(levels).toEqual(['few', 'few', 'some', 'some', 'many']);
+    expect(messages.map((text) => analyzeMessage({ text }).distinctRuleCount)).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it('handles malformed input without throwing', () => {
+    expect(() => analyzeMessage()).not.toThrow();
+    expect(() => analyzeMessage(null)).not.toThrow();
+    expect(() => analyzeMessage({ text: 123, sender: null })).not.toThrow();
+    expect(analyzeMessage({ text: 123 }).matches).toEqual([]);
+    expect(analyzeMessage({ text: '   ' }).hasInput).toBe(false);
+  });
 });

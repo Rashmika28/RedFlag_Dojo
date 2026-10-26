@@ -1,5 +1,6 @@
 // This file renders the practice start screen and the tappable message screen.
 import BeltBadge from './BeltBadge.jsx';
+import BeltTrack from './BeltTrack.jsx';
 
 export default function PracticeView({
   round,
@@ -11,10 +12,10 @@ export default function PracticeView({
 }) {
   if (!round) {
     return (
-      <main className="screen practice-screen">
+      <main id="main-content" tabIndex={-1} className="screen practice-screen" aria-labelledby="screen-title">
         <section className="hero hero--compact">
           <p className="eyebrow">Practice hall</p>
-          <h1>Read the message. Tap the tactics.</h1>
+          <h1 id="screen-title">Read the message. Tap the tactics.</h1>
           <p className="hero__lead">
             Three fictional messages. Tap a clause to flag it; tap again to clear it.
           </p>
@@ -29,6 +30,11 @@ export default function PracticeView({
             <span className="practice-start__label">Cumulative score</span>
             <span className="practice-start__value">{cumulativeScore}</span>
           </div>
+          <BeltTrack belt={currentBelt} />
+          <p className="practice-start__note">
+            Each catch earns 2 points. Each false flag costs 2 points. Missed clauses cost 0.
+            A clean message left untouched earns 6.
+          </p>
           <button type="button" className="btn btn--primary btn--wide practice-start__cta" onClick={onStartRound}>
             Start round
           </button>
@@ -40,7 +46,8 @@ export default function PracticeView({
   const scenario = round.scenarios[round.index];
 
   return (
-    <main className="screen practice-screen practice-screen--message">
+    <main id="main-content" tabIndex={-1} className="screen practice-screen practice-screen--message" aria-labelledby="screen-title">
+      <h1 id="screen-title" className="sr-only">Practice message {round.index + 1} of 3</h1>
       <div className="practice-progress">
         <span className="practice-progress__count">Message {round.index + 1} of 3</span>
         <BeltBadge belt={currentBelt} compact />

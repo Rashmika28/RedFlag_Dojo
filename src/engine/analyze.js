@@ -71,12 +71,14 @@ function resolveOverlaps(matches) {
   return result;
 }
 
-export function analyzeMessage({ text = '', sender = '' } = {}) {
-  const messageText = text || '';
-  const senderText = sender || '';
+export function analyzeMessage(input = {}) {
+  const { text = '', sender = '' } = input || {};
+  const messageText = typeof text === 'string' ? text : '';
+  const senderText = typeof sender === 'string' ? sender : '';
   const length = messageText.length;
   const isLong = length > 3000;
-  if (!messageText && !senderText) {
+  const hasInput = messageText.trim().length > 0 || senderText.trim().length > 0;
+  if (!hasInput) {
     return {
       matches: [],
       distinctRuleCount: 0,
@@ -84,8 +86,8 @@ export function analyzeMessage({ text = '', sender = '' } = {}) {
       rulesTriggered: [],
       checklist: [],
       hasInput: false,
-      isLong: false,
-      length: 0
+      isLong,
+      length
     };
   }
   if (isLong) {

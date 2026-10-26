@@ -14,10 +14,10 @@ export default function AnalyzeView({
   const canCheck = text.trim().length > 0 && !tooLong;
 
   return (
-    <main className="screen analyze-screen">
+    <main id="main-content" tabIndex={-1} className="screen analyze-screen" aria-labelledby="screen-title">
       <section className="hero">
         <p className="eyebrow">Signal practice for job chats</p>
-        <h1>Spot the pressure before you reply.</h1>
+        <h1 id="screen-title">Spot the pressure before you reply.</h1>
         <p className="hero__lead">
           Paste a first-contact recruiter message. We show the exact phrases that
           tripped a rule, the tactic behind each one, and what to verify.

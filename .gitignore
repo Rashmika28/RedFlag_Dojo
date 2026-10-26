@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Local/private files
+.env
+.env.*
+!.env.example
+devpost/learner-profile.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

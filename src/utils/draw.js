@@ -10,18 +10,30 @@ function shuffle(items) {
   return copy;
 }
 
+function mixKey(picked) {
+  return picked.map((scenario) => scenario.id).sort().join('|');
+}
+
 export function drawRound(previousIds = []) {
   const suspicious = scenarios.filter((scenario) => scenario.type === 'suspicious');
   const clean = scenarios.filter((scenario) => scenario.type === 'clean');
   const previousKey = [...previousIds].sort().join('|');
+  const mixes = [];
 
-  for (let attempt = 0; attempt < 20; attempt++) {
-    const picked = [...shuffle(suspicious).slice(0, 2), shuffle(clean)[0]];
-    const key = picked.map((scenario) => scenario.id).sort().join('|');
-    if (key !== previousKey) {
-      return shuffle(picked);
+  for (let first = 0; first < suspicious.length; first++) {
+    for (let second = first + 1; second < suspicious.length; second++) {
+      for (let third = 0; third < clean.length; third++) {
+        mixes.push([suspicious[first], suspicious[second], clean[third]]);
+      }
     }
   }
 
-  return shuffle([...shuffle(suspicious).slice(0, 2), clean[0]]);
+  if (mixes.length === 0) {
+    return shuffle(scenarios.slice(0, 3));
+  }
+
+  const alternatives = mixes.filter((picked) => mixKey(picked) !== previousKey);
+  const pool = alternatives.length > 0 ? alternatives : mixes;
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  return shuffle(picked);
 }

@@ -4,9 +4,32 @@ A scam-signal trainer for Indian freshers. Paste a first-contact recruiter messa
 
 Signals only. RedFlag Dojo never issues a verdict, never claims to detect scams with AI, and never reports an accuracy figure.
 
-## Live app
+## Deployment
 
-Deploy status: Netlify static deploy from this repo. Build command `npm run build`, publish directory `dist` (also set in `netlify.toml`).
+Status: not deployed yet. This is a static client-side build with no backend, database, accounts, secrets, or environment variables.
+
+Vite settings: build command `npm run build`, output directory `dist`. Netlify reads the committed `netlify.toml` (Node 20, SPA fallback, basic security headers).
+
+Netlify:
+
+1. Push this repository to GitHub.
+2. Import the repository in Netlify. Keep the detected settings (`npm run build`, `dist`).
+3. Deploy and verify the live URL manually.
+
+Cloudflare Pages:
+
+1. Connect the repository, choose the Vite preset.
+2. Use build command `npm run build` and output directory `dist`.
+3. No environment variables are required.
+
+Do not claim a live URL until the deploy succeeds and the checks below pass on the live site.
+
+Manual live-site checks:
+
+- Load the site on a phone-sized viewport and at desktop width.
+- Press **Try an example**, confirm marks, ledger, checklist, and disclaimer.
+- Complete a three-message round, then use **Play again** and **Back to Analyze**.
+- Confirm no horizontal scrolling at 320px and no console errors.
 
 ## Run locally
 
@@ -24,9 +47,9 @@ npm test        # watch mode
 npm run test:run
 ```
 
-The suite covers the 12 rules, clean-message false-positive checks, overlapping matches, the example message, scoring floors, the clean-message rule, belt thresholds, and data constraints.
+The suite covers each rule's intended phrase, sender-line offsets, overlapping matches, malformed input, clean-message false-positive checks, the example message, checklist capping, the full Analyze-to-Practice flow, over-limit input, scoring floors, false-flag costs, the clean-message rule, belt thresholds and belt-up, scenario selection, and data constraints.
 
-Current run: **57 of 57 written cases behave as expected.** This is a written test count, not an accuracy claim.
+Current run: **106 of 106 written cases behave as expected.** This is a written test count, not an accuracy claim.
 
 ## Build
 
@@ -39,12 +62,12 @@ npm run preview
 
 - **Analyze**: paste a message and optional sender line, or press **Try an example**. The engine returns matches with start/end positions, a source (`text` or `sender`), distinct rule count, a summary level (`none`, `few`, `some`, `many`), and a capped checklist built only from triggered signals.
 - **Results**: numbered marks on the message, an evidence ledger (phrase, tactic, why it matters, what to verify), the checklist, and a bridge to Practice.
-- **Practice**: a round is 3 scenarios with exactly 2 suspicious and 1 clean. Each message has 6-10 tappable clauses. Submit to see caught, missed, and false-flag states, then finish the round for a score out of 18, a cumulative session score, and a belt.
-- **Belts**: White 0, Yellow 15, Brown 40, Black 80. Session-only. Refresh resets to White.
+- **Practice**: a round is 3 scenarios with exactly 2 suspicious and 1 clean. Each message has 6-10 tappable clauses. Submit to see caught, missed, and false-flag states, then finish the round for a score out of 18, a cumulative session score, and a belt. Replays avoid repeating the previous mix when another mix is available.
+- **Belts**: White 0, Yellow 15, Brown 40, Black 80. The full progression rail is visible on the practice start and round summary screens. Session-only; refresh resets to White.
 
 ## Scoring
 
-- Suspicious message: +2 per caught suspicious clause, -1 per false flag, misses cost nothing, floor 0, max 6.
+- Suspicious message: +2 per caught suspicious clause, -2 per false flag, misses cost nothing, floor 0, max 6.
 - Clean message: 6 minus 2 per false tap, floor 0. Leaving it untouched earns 6.
 - Round: sum of 3 message scores, max 18.
 
@@ -56,7 +79,8 @@ npm run preview
 - `src/components/PracticeView.jsx` - round start and tappable clause screen.
 - `src/components/FeedbackView.jsx` - caught/missed/false-flag feedback.
 - `src/components/RoundSummary.jsx` - score, belt, belt-up, recap.
-- `src/components/BeltBadge.jsx` - belt indicator.
+- `src/components/BeltBadge.jsx` - compact belt indicator.
+- `src/components/BeltTrack.jsx` - four-rank belt progression rail.
 - `src/components/ErrorBoundary.jsx` - render-error recovery screen.
 - `src/data/rules.json` - 12 rules across 6 categories.
 - `src/data/scenarios.json` - 8 fictional scenarios (6 suspicious, 2 clean).
@@ -66,7 +90,7 @@ npm run preview
 - `src/utils/draw.js` - draws 2 suspicious + 1 clean scenario per round.
 - `src/utils/rules.js` - tactic lookup for practice feedback.
 - `src/styles/index.css` - dojo theme and responsive layout.
-- `tests/` - Vitest suites for analysis, scoring, and data validation.
+- `tests/` - Vitest suites for analysis, scoring, scenario drawing, app flow, error recovery, and data validation.
 
 ## Data rules
 
