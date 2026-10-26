@@ -39,7 +39,7 @@ export function scoreMessage({ chunks = [], selectedChunkIds = [], scenarioType 
     if (messageScore < 0) messageScore = 0;
     if (messageScore > 6) messageScore = 6;
   } else {
-    messageScore = (correctCaught * 2) + (falseFlags * -2);
+    messageScore = (correctCaught * 2) + (falseFlags * -1);
     if (messageScore < 0) messageScore = 0;
     if (messageScore > 6) messageScore = 6;
   }

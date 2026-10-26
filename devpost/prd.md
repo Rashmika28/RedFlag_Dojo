@@ -98,7 +98,7 @@ Button: **"Next"**. If this is the last message of the round, the Next button mu
 - **Scenarios**: 8 fictional scenarios (6 suspicious, 2 clean), each 6-10 chunks. Chunks: `{ text, suspicious: boolean, tacticId?: string }`. **Suspicious scenarios MUST have exactly 3 suspicious chunks. Clean scenarios MUST have 0.** Every suspicious chunk's `tacticId` must exist in `rules.json`.
 - **Message scoring (per message, max 6)**:
   - `+2` per correct flag (caught)
-  - `-2` per false flag (selected a clean chunk)
+  - `-1` per false flag (selected a clean chunk)
   - Misses cost nothing
   - Floor `0` 
   - Clean message rule: `6 minus 2 per false tap` (i.e. `6 + (falseFlags * -2)`), floor `0` (leaving untouched = 6). Selecting all chunks on a clean message must give 0.

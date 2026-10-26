@@ -41,14 +41,14 @@ describe('scoring', () => {
     expect(res.messageScore).toBe(2);
   });
 
-  it('false flag on suspicious gives -2', () => {
+  it('false flag on suspicious gives -1', () => {
     const chunks = [
       { id: 'c1', text: 'bad', suspicious: true },
       { id: 'c2', text: 'ok', suspicious: false }
     ];
     const res = scoreMessage({ chunks, selectedChunkIds: ['c1', 'c2'], scenarioType: 'suspicious' });
     expect(res.falseFlags).toBe(1);
-    expect(res.messageScore).toBe(0); // 2 + (-2)
+    expect(res.messageScore).toBe(1); // 2 + (-1)
   });
 
   it('false flags reduce a suspicious message score', () => {
@@ -59,7 +59,21 @@ describe('scoring', () => {
       { id: 'c4', text: 'ok', suspicious: false }
     ];
     const res = scoreMessage({ chunks, selectedChunkIds: ['c1', 'c2', 'c3', 'c4'], scenarioType: 'suspicious' });
-    expect(res.messageScore).toBe(4); // 6 - 2
+    expect(res.messageScore).toBe(5); // 6 - 1
+  });
+
+  it('a suspicious message with 3 suspicious chunks, 2 caught and 1 false flag, scores 3', () => {
+    const chunks = [
+      { id: 'c1', text: 'bad1', suspicious: true },
+      { id: 'c2', text: 'bad2', suspicious: true },
+      { id: 'c3', text: 'bad3', suspicious: true },
+      { id: 'c4', text: 'ok', suspicious: false }
+    ];
+    const res = scoreMessage({ chunks, selectedChunkIds: ['c1', 'c2', 'c4'], scenarioType: 'suspicious' });
+    expect(res.correctCaught).toBe(2);
+    expect(res.missed).toBe(1);
+    expect(res.falseFlags).toBe(1);
+    expect(res.messageScore).toBe(3); // 4 - 1
   });
 
   it('misses cost nothing and floor 0', () => {

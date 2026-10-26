@@ -51,7 +51,7 @@ export default function RoundSummary({ summary, round, onPlayAgain, onBackToAnal
       <section className="section-block">
         <div className="section-heading">
           <h2>Round breakdown</h2>
-          <p>Misses cost no points. Each false flag costs 2.</p>
+          <p>Misses cost no points. False flags do.</p>
         </div>
         <div className="breakdown-grid">
           <div className="breakdown-stat">

@@ -179,8 +179,8 @@ export const BELT_ORDER = ['WHITE', 'YELLOW', 'BROWN', 'BLACK'];
 ```
 **Rules:**
 - For each suspicious chunk: if selected -> caught (+2 contribution towards message score), else missed
-- For each clean chunk: if selected -> false flag (-2 per false tap)
-- **Suspicious messages**: `messageScore = min(6, max(0, (correctCaught*2) + (falseFlags * -2)))` (misses cost nothing). 
+- For each clean chunk: if selected -> false flag (-1 per false tap in general; see clean rule)
+- **Suspicious messages**: `messageScore = min(6, max(0, (correctCaught*2) + (falseFlags * -1)))` (misses cost nothing). 
 - **Clean messages**: `messageScore = min(6, max(0, 6 + (falseFlags * -2)))` (i.e. `6 minus 2 per false tap`, floor 0). Selecting all chunks gives 0. Leaving untouched = 6.
 - Add test for clean message with all chunks selected (must be 0).
 - Return breakdown for feedback screen.
@@ -247,7 +247,7 @@ Location: `tests/`
 - **"Try an example" test**: example message triggers 4-5 rules across different categories
 
 ### `scoring.test.js`
-- +2 correct, -2 false flag, misses cost nothing
+- +2 correct, -1 false flag, misses cost nothing
 - Floor 0
 - Max 6 per message
 - **Clean message**: 6 minus 2 per false tap, floor 0 (test leaving untouched = 6, all selected = 0)

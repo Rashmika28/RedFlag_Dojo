@@ -58,7 +58,9 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
                 )}
                 {state === 'false-flag' && (
                   <p className="feedback-chunk__note">
-                    This clause carried no tactic. Flagging it costs 2 points; leaving it alone protects your score.
+                    {scenario.type === 'clean'
+                      ? 'This clause carried no tactic. Flagging it costs 2 points; leaving it alone protects your score.'
+                      : 'This clause carried no tactic. Flagging it costs 1 point; leaving it alone protects your score.'}
                   </p>
                 )}
               </div>
@@ -72,7 +74,7 @@ export default function FeedbackView({ feedback, messageIndex, totalMessages, on
         <span>Missed {result.missed}</span>
         <span>False flags {result.falseFlags}</span>
       </div>
-      <p className="feedback-legend">+2 per catch. -2 per false flag. Misses cost 0.</p>
+      <p className="feedback-legend">+2 per catch. -1 per false flag. Misses cost 0.</p>
 
       <div className="practice-actions">
         <button type="button" className="btn btn--primary btn--wide" onClick={onNext}>

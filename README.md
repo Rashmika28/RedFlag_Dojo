@@ -49,7 +49,7 @@ npm run test:run
 
 The suite covers each rule's intended phrase, sender-line offsets, overlapping matches, malformed input, clean-message false-positive checks, the example message, checklist capping, the full Analyze-to-Practice flow, over-limit input, scoring floors, false-flag costs, the clean-message rule, belt thresholds and belt-up, scenario selection, and data constraints.
 
-Current run: **106 of 106 written cases behave as expected.** This is a written test count, not an accuracy claim.
+Current run: **107 of 107 written cases behave as expected.** This is a written test count, not an accuracy claim.
 
 ## Build
 
@@ -67,7 +67,7 @@ npm run preview
 
 ## Scoring
 
-- Suspicious message: +2 per caught suspicious clause, -2 per false flag, misses cost nothing, floor 0, max 6.
+- Suspicious message: +2 per caught suspicious clause, -1 per false flag, misses cost nothing, floor 0, max 6.
 - Clean message: 6 minus 2 per false tap, floor 0. Leaving it untouched earns 6.
 - Round: sum of 3 message scores, max 18.
 

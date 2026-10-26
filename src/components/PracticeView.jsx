@@ -32,7 +32,7 @@ export default function PracticeView({
           </div>
           <BeltTrack belt={currentBelt} />
           <p className="practice-start__note">
-            Each catch earns 2 points. Each false flag costs 2 points. Missed clauses cost 0.
+            Each catch earns 2 points. Each false flag costs 1 point. Missed clauses cost 0.
             A clean message left untouched earns 6.
           </p>
           <button type="button" className="btn btn--primary btn--wide practice-start__cta" onClick={onStartRound}>
