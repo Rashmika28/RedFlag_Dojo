@@ -1,0 +1,134 @@
+[
+  {
+    "id": "fee-upfront-1",
+    "tacticId": "upfront_fees",
+    "category": "upfront_fees",
+    "tacticName": "Upfront fees",
+    "patterns": ["registration fee", "processing fee", "pay\\s+(\\w+\\s+){0,4}fee"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Legitimate recruiters do not ask freshers to pay to be considered for a first-contact opportunity.",
+    "whatToVerify": "Verify the company's official careers page via a known URL, not a link sent in chat.",
+    "checklistAction": "Ask for the official application link and confirm fee policy in writing from a verified channel."
+  },
+  {
+    "id": "fee-upfront-2",
+    "tacticId": "upfront_fees",
+    "category": "upfront_fees",
+    "tacticName": "Upfront fees",
+    "patterns": ["security deposit", "training fee"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Legitimate recruiters do not ask freshers to pay to be considered for a first-contact opportunity.",
+    "whatToVerify": "Verify the company's official careers page via a known URL, not a link sent in chat.",
+    "checklistAction": "Ask for the official application link and confirm fee policy in writing from a verified channel."
+  },
+  {
+    "id": "msg-push-1",
+    "tacticId": "push_to_messaging",
+    "category": "push_to_messaging",
+    "tacticName": "Push to messaging apps",
+    "patterns": ["move this to whatsapp", "move this to telegram", "move to telegram", "chat on whatsapp"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Moving recruitment off a formal channel can be used to avoid leaving a trace or applying pressure.",
+    "whatToVerify": "Insist on continuing via the original channel or the company's official careers email.",
+    "checklistAction": "Only communicate through verified company channels and avoid sharing personal details on personal messaging apps."
+  },
+  {
+    "id": "msg-push-2",
+    "tacticId": "push_to_messaging",
+    "category": "push_to_messaging",
+    "tacticName": "Push to messaging apps",
+    "patterns": ["connect on whatsapp", "talk on telegram", "continue on whatsapp"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Moving recruitment off a formal channel can be used to avoid leaving a trace or applying pressure.",
+    "whatToVerify": "Insist on continuing via the original channel or the company's official careers email.",
+    "checklistAction": "Only communicate through verified company channels and avoid sharing personal details on personal messaging apps."
+  },
+  {
+    "id": "email-free-1",
+    "tacticId": "free_personal_email",
+    "category": "free_personal_email",
+    "tacticName": "Free/personal email domain",
+    "patterns": ["@gmail\\.com", "@yahoo\\.com", "@hotmail\\.com", "@outlook\\.com"],
+    "patternType": "regex",
+    "whyItMatters": "Many legitimate companies use official domains; a free personal domain is a weak signal that needs verification.",
+    "whatToVerify": "Check if the sender domain matches the company's official website careers domain.",
+    "checklistAction": "Verify the recruiter email domain against the company's official careers page."
+  },
+  {
+    "id": "email-free-2",
+    "tacticId": "free_personal_email",
+    "category": "free_personal_email",
+    "tacticName": "Free/personal email domain",
+    "patterns": ["@rediffmail\\.com", "@aol\\.com"],
+    "patternType": "regex",
+    "whyItMatters": "Many legitimate companies use official domains; a free personal domain is a weak signal that needs verification.",
+    "whatToVerify": "Check if the sender domain matches the company's official website careers domain.",
+    "checklistAction": "Verify the recruiter email domain against the company's official careers page."
+  },
+  {
+    "id": "urgency-1",
+    "tacticId": "urgency_pressure",
+    "category": "urgency_pressure",
+    "tacticName": "Urgency/pressure",
+    "patterns": ["limited slots", "act now", "hurry up", "last chance"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Artificial urgency is used to rush decisions and bypass normal verification steps.",
+    "whatToVerify": "Ask for a reasonable timeline and confirm the opening exists on the official careers page.",
+    "checklistAction": "Do not rush - verify the opportunity through official channels before responding under pressure."
+  },
+  {
+    "id": "urgency-2",
+    "tacticId": "urgency_pressure",
+    "category": "urgency_pressure",
+    "tacticName": "Urgency/pressure",
+    "patterns": ["expires (today|tonight|soon)", "apply within", "urgent hiring"],
+    "patternType": "regex",
+    "whyItMatters": "Artificial urgency is used to rush decisions and bypass normal verification steps.",
+    "whatToVerify": "Ask for a reasonable timeline and confirm the opening exists on the official careers page.",
+    "checklistAction": "Do not rush - verify the opportunity through official channels before responding under pressure."
+  },
+  {
+    "id": "pii-bank-1",
+    "tacticId": "early_pii_bank",
+    "category": "early_pii_bank",
+    "tacticName": "Early Aadhaar/PAN/bank requests",
+    "patterns": ["aadhaar", "aadhar", "pan card"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Legitimate first-contact recruiters rarely ask for sensitive identity/bank details before an official offer and verification process.",
+    "whatToVerify": "Never share sensitive documents via chat; only share after verifying through official channels and proper onboarding.",
+    "checklistAction": "Do not share Aadhaar/PAN/bank details over chat or unverified forms."
+  },
+  {
+    "id": "pii-bank-2",
+    "tacticId": "early_pii_bank",
+    "category": "early_pii_bank",
+    "tacticName": "Early Aadhaar/PAN/bank requests",
+    "patterns": ["bank account", "ifsc", "bank details"],
+    "patternType": "phraseOrRegex",
+    "whyItMatters": "Legitimate first-contact recruiters rarely ask for sensitive identity/bank details before an official offer and verification process.",
+    "whatToVerify": "Never share sensitive documents via chat; only share after verifying through official channels and proper onboarding.",
+    "checklistAction": "Do not share Aadhaar/PAN/bank details over chat or unverified forms."
+  },
+  {
+    "id": "vague-pay-1",
+    "tacticId": "vague_unrealistic_pay",
+    "category": "vague_unrealistic_pay",
+    "tacticName": "Vague role or unrealistic pay",
+    "patterns": ["work from home.*\\d{5,}", "\\d{6,}.*per month", "high pay.*no experience"],
+    "patternType": "regex",
+    "whyItMatters": "Unrealistic pay for no experience or vague roles can be a lure to get payments or personal details.",
+    "whatToVerify": "Compare the pay range with similar entry-level roles on official company career pages.",
+    "checklistAction": "Verify the role and pay against official job postings before proceeding."
+  },
+  {
+    "id": "vague-pay-2",
+    "tacticId": "vague_unrealistic_pay",
+    "category": "vague_unrealistic_pay",
+    "tacticName": "Vague role or unrealistic pay",
+    "patterns": ["data entry.*easy.*high pay", "simple task.*big payout"],
+    "patternType": "regex",
+    "whyItMatters": "Unrealistic pay for no experience or vague roles can be a lure to get payments or personal details.",
+    "whatToVerify": "Compare the pay range with similar entry-level roles on official company career pages.",
+    "checklistAction": "Verify the role and pay against official job postings before proceeding."
+  }
+]
